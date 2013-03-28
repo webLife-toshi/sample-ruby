@@ -1,7 +1,19 @@
 #!/usr/bin/ruby
 
-require 'cgi'
+require 'sqlite3'
 
-cgi = CGI.new
-puts cgi.header
-puts "<html><body>This is a test</body></html>"
+begin
+	db = SQLite3::Database.new ":memory:"
+	puts db.get_first_value 'SELECT SQLITE_VERSION()'
+
+ rescue SQLite3::Exception => e
+
+	puts "Exception occured"
+	puts e
+
+ ensure
+	db.close if db
+
+end
+
+
