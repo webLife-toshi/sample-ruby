@@ -6,8 +6,10 @@ require 'sqlite3'
 
 	db = SQLite3::Database.open ":testsql:"
 	
-	db.execute "CREATE TABLE IF NOT EXISTS Form(Id INTEGER PRIMARY KEY, Name TEXT not null, Email TEXT unique, Comment TEXT)"
-	db.execute "INSERT INTO Form VALUES(1, 'Audi', 'example1@email.com','test test test test test test test test test test test test test' )"
+	db.execute "INSERT INTO Form(Name,Email,Comment) VALUES('Tom', 'example2@email.com','hello, everyone. How is your feeling?' )"
+
+	id = db.last_insert_row_id
+	puts "The last id of the inserted row is #{id}"
 
  rescue SQLite3::Exception => e
 
